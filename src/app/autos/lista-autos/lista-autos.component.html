@@ -1,0 +1,57 @@
+<div class="container">
+    <div class="card">
+        <div class="card-header">
+            <h1>{{tituloListaAutos}}</h1>
+        </div>
+        <div class="card-body">
+            <div class="row">
+                <div class="col-md-12">
+                    <label>Filtrar por:</label>
+                </div>
+                <div class="col-md-4">
+                    <input type="text" [(ngModel)]="filtro">
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-6">
+                    <h3>Filtrado por: {{filtro}}</h3>
+                </div> 
+            </div>
+        </div>
+
+        <table class="table" *ngIf="arregloAutos.length>0">
+            <thead>
+                <tr class="text-primary">
+                    <th>
+                        <button class="btn btn-primary" (click)="muestraImagenes()">{{ muestraImagen ? "Oculta ":"Muestra "}} imágenes</button>
+                    </th>
+                    <th>Marca</th>
+                    <th>Modelo</th>
+                    <th>Año</th>
+                    <th>Color</th>
+                    <th>Kilómetros</th>
+                    <th>Precio</th>
+                    <th>Calificación</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr class="" *ngFor="let autos of listaAutosFiltrados">
+                    <td><p *ngIf="muestraImagen">
+                        <img [src]="autos.img" width="90px"></p>
+                    </td>
+                    <td>{{autos.marca }}</td>
+                    <td><a [routerLink]="['/auto', autos.id]">{{ autos.modelo | lowercase | aEspacio:"-" }}</a></td>
+                    <td>{{autos.anio}}</td>
+                    <td>{{autos.color}}</td>
+                    <td>{{autos.kilometros}}</td>
+                    <td>{{autos.precio}}</td>
+                    <td>
+                        <app-estrellass [calificacion]="autos.calificacion"
+                        (starsClick)="onClickCalificacion($event)">
+                        </app-estrellass>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
